@@ -3,7 +3,7 @@ let precio= 0;
 let total= 0;
 
 do{
-    let codigo = Number(prompt("Ingrese el código del producto para añadirlo al carrito:"))
+    let codigo = Number(prompt("Ingrese el código del producto para añadirlo al carrito:\n(Número del 1 al 20)"))
     
     switch (codigo){
         case 1:

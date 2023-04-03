@@ -3,8 +3,9 @@ let precio= 0;
 let total= 0;
 let productosHtml=""
 
-const productos = [
-        {id: 1, nombre: "Serum ACF Dadatina", precio: 2200},
+// Array //
+const productos = [ 
+        {id: 1, nombre: "Serum ACF Dadatina", precio: 2200}, // Objetos //
         {id: 2, nombre: "Tónico ACF Dadatina", precio: 3100},
         {id: 3, nombre: "Contorno CeraVe", precio: 2670},
         {id: 4, nombre: "Dermaglós 65FPS", precio: 2390},
@@ -26,6 +27,7 @@ const productos = [
         {id: 20, nombre: "Set de Brochas", precio: 4016} 
 ];
 
+// Método de búsqueda //
 for(const producto of productos){
         productosHtml += `<div class="col-10 mb-5 col-md-3">`
         productosHtml += `<div class="card text-center">`
@@ -38,31 +40,6 @@ for(const producto of productos){
 }
 
 document.getElementById("productos").innerHTML = productosHtml
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 do{
     let codigo = Number(prompt("Ingrese el código del producto para añadirlo al carrito:\n(Número del 1 al 20)"))

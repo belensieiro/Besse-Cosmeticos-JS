@@ -136,7 +136,7 @@ function renderizarListaDeProductos() {
 
     // Creo la imagen del producto //
     const img = document.createElement("img");
-    img.src = `../../assets/productos/${productoDeLista.id}.jpg`;
+    img.src = `./assets/productos/${productoDeLista.id}.jpg`;
     img.setAttribute("class", "img-card");
     img.setAttribute("alt", `imagen de producto ${productoDeLista.nombre}`);
 

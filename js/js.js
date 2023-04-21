@@ -1,4 +1,3 @@
-
 const productos = [
   { id: 1, nombre: "Serum ACF Dadatina", precio: 2200 },
   { id: 2, nombre: "Tónico ACF Dadatina", precio: 3100 },
@@ -70,18 +69,6 @@ function actualizarLS() {
   localStorage.setItem("productosCarrito", listaDeProductosJSON);
 }
 
-function borrarProductos() {
-  localStorage.clear();
-  localStorage.setItem("productosCarrito","[]")
-  renderizarCarrito();
-  updateCountCarrito();
-}
-
-document.getElementById("borrarProductos").addEventListener("click", () => {
-  // Agregar producto al carrito //
-  borrarProductos();
-});
-
 function updateCountCarrito() {
   if (JSON.parse(localStorage.getItem("productosCarrito")) != null) {
     countCarrito = JSON.parse(localStorage.getItem("productosCarrito")).length;
@@ -108,9 +95,9 @@ function alternMenu() {
     let iva = total * 0.21;
     let totalFinal = total + iva;
 
-    document.getElementById("subtotal").innerHTML = total;
-    document.getElementById("iva").innerHTML = iva;
-    document.getElementById("totalCarrito").innerHTML = totalFinal;
+    document.getElementById("subtotal").innerHTML = "$"+ total;
+    document.getElementById("iva").innerHTML = "$"+ iva;
+    document.getElementById("totalCarrito").innerHTML = "$"+ totalFinal;
   }
 }
 
@@ -193,10 +180,10 @@ function renderizarListaDeProductos() {
 
 function agregarProductoAlCarrito(productoAAgregar){
   productosEnElCarrito.push(new ProductoEnCarrito(productoAAgregar.id, productoAAgregar.nombre, productoAAgregar.precio))
-  actualizarLS()
   notification("Has añadido un nuevo producto", "check");
-  renderizarCarrito()
-  updateBasketCount();
+  actualizarLS();
+  updateCountCarrito();
+  renderizarCarrito();
 }
 
 /*Funcion de notificaciones customs*/
@@ -261,3 +248,4 @@ function renderizarCarrito(){
 
 renderizarCarrito()
 updateBasketCount();
+alternMenu()

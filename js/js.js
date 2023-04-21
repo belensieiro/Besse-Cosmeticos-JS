@@ -107,7 +107,7 @@ function eliminarProducto(producto) {
   });
 
   productosEnElCarrito.splice(indiceElementoAEliminar, 1);
-  notification("Has eliminado un producto del carrito", "check");
+  notification("Has eliminado un producto", "check");
 
   actualizarLS();
   updateCountCarrito();

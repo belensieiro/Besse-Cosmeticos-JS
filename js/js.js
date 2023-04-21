@@ -214,7 +214,7 @@ function renderizarCarrito(){
       div.setAttribute("style", "border-bottom: 1px solid rgba(0,0,0,0.105)")
 
       const img = document.createElement("img");
-      img.src = `../assets/productos/${productoCarrito.id}.jpg`;
+      img.src = `./assets/productos/${productoCarrito.id}.jpg`;
       img.setAttribute("style", "width: 65px;");
       img.setAttribute("alt", `imagen de producto ${productoCarrito.nombre}`);
 

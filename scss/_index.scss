@@ -10,6 +10,40 @@
     background-attachment: fixed;
     background-size: cover;
 
+    .notifications {
+        position: fixed;
+        bottom: 1%;
+        left: .5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999999;
+      }
+
+      .notification {
+        display: flex;
+        margin-top: 0.5%;
+        height: 5%;
+        width: fit-content;
+        background: rgb(235, 230, 230);
+        border: 2px solid rgb(238, 88, 205);
+        border-radius: 14px;
+        color: black;
+        align-items: center;
+        padding: 4px;
+        animation: anim 300ms ease-in-out;
+
+        & i {
+            padding: 6px;
+            border-radius: 100%;
+            margin-right: 3px;
+            color: white;
+          }
+      }
+
+
+
     .h1-p {
         font-size: 55px;
     }
@@ -33,5 +67,9 @@
 
 footer{
     box-shadow: $shadow;
+}
+
+.b-color{
+    color: $secundario;
 }
 

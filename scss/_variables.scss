@@ -1,11 +1,12 @@
 // personalizados //
 $principal: rgb(235, 148, 216);
 $shadow: 5px 5px 30px 0px rgba(0, 0, 0, 0.288);
-
+$secundario: rgb(238, 88, 205);
 // VARIABLES BS //
 
 // colores //
 $danger: $principal;
+$success: $secundario; 
 
 // navbar //
 $navbar-light-color:  black;
@@ -17,4 +18,3 @@ $carousel-control-color: black;
 // card //
 $card-border-color: white;
 $card-box-shadow: 10px 10px 47px 0px rgba(0,0,0,0.81);
-

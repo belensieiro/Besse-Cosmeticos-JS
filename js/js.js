@@ -231,7 +231,7 @@ function renderizarCarrito() {
 }
 
 function obtenerProductosDelJSON() {
-  fetch("/json/productos.json")
+  fetch("./json/productos.json")
     .then((response) => {
       return response.json();
     })

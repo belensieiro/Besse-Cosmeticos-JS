@@ -1,0 +1,104 @@
+[
+    {   
+        "id": 1,
+        "nombre": "Serum ACF Dadatina",
+        "precio": 2200   
+    },
+    {
+        "id": 2,
+        "nombre": "Tónico ACF Dadatina",
+        "precio": 3100
+    },
+    {
+        "id": 3,
+        "nombre": "Contorno CeraVe",
+        "precio": 2670
+    },
+    {
+        "id": 4,
+        "nombre": "Dermaglós 65FPS",
+        "precio": 2390
+    },
+    {
+        "id": 5,
+        "nombre": "Hidratante Dermaglós",
+        "precio": 3300
+    },
+    {
+        "id": 6,
+        "nombre": "Contorno Dermaglós",
+        "precio": 2310
+    },
+    {
+        "id": 7,
+        "nombre": "Serum Dermaglós",
+        "precio": 2670
+    },
+    {
+        "id": 8,
+        "nombre": "Serum Effaclar",
+        "precio": 6214
+    },
+    {
+        "id": 9,
+        "nombre": "Limpiador Effaclar",
+        "precio": 4709
+    },
+    {
+        "id": 10,
+        "nombre": "Eucerin 30FPS",
+        "precio": 4330
+    },
+    {
+        "id": 11,
+        "nombre": "Agua Micelar Garnier",
+        "precio": 2170
+    },
+    {
+        "id": 12,
+        "nombre": "Serum Revitalift",
+        "precio": 4590
+    },
+    {
+        "id": 13,
+        "nombre": "Limpiador Revitalift",
+        "precio": 2615
+    },
+    {
+        "id": 14,
+        "nombre": "Vitamina C La Rochey",
+        "precio": 6505
+    },
+    {
+        "id": 15,
+        "nombre": "Rubor Extreme",
+        "precio": 2170
+    },
+    {
+        "id": 16,
+        "nombre": "Labial Superstay",
+        "precio": 3010
+    },
+    {
+        "id": 17,
+        "nombre": "Labial Vogue",
+        "precio": 1780
+    },
+    {
+        "id": 18,
+        "nombre": "Base Vogue",
+        "precio": 2910
+    },
+    {
+        "id": 19,
+        "nombre": "Set de Brochas",
+        "precio": 6299
+    },
+    {
+        "id": 20,
+        "nombre": "Set de Brochas",
+        "precio": 4016
+    }
+
+    
+]

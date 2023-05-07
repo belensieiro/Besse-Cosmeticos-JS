@@ -1,27 +1,26 @@
-const productos = [
-  { id: 1, nombre: "Serum ACF Dadatina", precio: 2200 },
-  { id: 2, nombre: "Tónico ACF Dadatina", precio: 3100 },
-  { id: 3, nombre: "Contorno CeraVe", precio: 2670 },
-  { id: 4, nombre: "Dermaglós 65FPS", precio: 2390 },
-  { id: 5, nombre: "Hidratante Dermaglós", precio: 3300 },
-  { id: 6, nombre: "Contorno Dermaglós", precio: 2310 },
-  { id: 7, nombre: "Serum Dermaglós", precio: 2670 },
-  { id: 8, nombre: "Serum Effaclar", precio: 6214 },
-  { id: 9, nombre: "Limpiador Effaclar", precio: 4709 },
-  { id: 10, nombre: "Eucerin 30FPS", precio: 4330 },
-  { id: 11, nombre: "Agua Micelar Garnier", precio: 2170 },
-  { id: 12, nombre: "Serum Revitalift", precio: 4590 },
-  { id: 13, nombre: "Limpiador Revitalift", precio: 2615 },
-  { id: 14, nombre: "Vitamina C La Rochey", precio: 6505 },
-  { id: 15, nombre: "Rubor Extreme", precio: 2170 },
-  { id: 16, nombre: "Labial Superstay", precio: 3010 },
-  { id: 17, nombre: "Labial Vogue", precio: 1780 },
-  { id: 18, nombre: "Base Vogue", precio: 2910 },
-  { id: 19, nombre: "Set de Brochas", precio: 6299 },
-  { id: 20, nombre: "Set de Brochas", precio: 4016 },
-];
+let options = {
+  labels: {
+    success: "Notificación",
+  },
+  position: "bottom-left",
+};
+
+let notifier = new AWN(options);
+options.labels = {
+  success: "Notificación",
+};
+
+const productos = [];
 
 //CLASES//
+class Producto {
+  constructor(id, nombre, precio) {
+    this.id = id;
+    this.nombre = nombre;
+    this.precio = precio;
+  }
+}
+
 class ProductoEnCarrito {
   constructor(id, nombre, precio) {
     this.id = id;
@@ -51,12 +50,12 @@ function obtenerProductos() {
 }
 const productosEnElCarrito = obtenerProductos();
 
-var countCarrito;
+let countCarrito;
 function updateBasketCount() {
   if (JSON.parse(localStorage.getItem("productosCarrito")) != "[]") {
     countCarrito = JSON.parse(localStorage.getItem("productosCarrito")).length;
   } else {
-    countCarrito = 0
+    countCarrito = 0;
   }
   document.getElementById("count-carrito").innerHTML = countCarrito;
 }
@@ -73,31 +72,32 @@ function updateCountCarrito() {
   if (JSON.parse(localStorage.getItem("productosCarrito")) != null) {
     countCarrito = JSON.parse(localStorage.getItem("productosCarrito")).length;
   } else {
-    countCarrito = 0
+    countCarrito = 0;
   }
   document.getElementById("count-carrito").innerHTML = countCarrito;
   alternMenu();
 }
 
 function alternMenu() {
-  if (JSON.parse(localStorage.getItem("productosCarrito")) == "[]") {
-    document.getElementById("subtotal").innerHTML = 0;
-    document.getElementById("iva").innerHTML = 0;
-    document.getElementById("totalCarrito").innerHTML = 0;
-
-  }else{
+  if (JSON.parse(localStorage.getItem("productosCarrito")).length == 0) {
+    document.getElementById("buyInfo").style.display = "none";
+    document.getElementById("noProductos").style.display = "flex";
+    console.log("no hay productos");
+  } else {
+    document.getElementById("buyInfo").style.display = "flex";
+    document.getElementById("noProductos").style.display = "none";
     let total = 0;
     let valuearray = JSON.parse(localStorage.getItem("productosCarrito", "precio"));
-    
+
     for (let i = 0; i < JSON.parse(localStorage.getItem("productosCarrito")).length; i++) {
       total += parseInt(JSON.stringify(valuearray[i].precio));
     }
     let iva = total * 0.21;
     let totalFinal = total + iva;
 
-    document.getElementById("subtotal").innerHTML = "$"+ total;
-    document.getElementById("iva").innerHTML = "$"+ iva;
-    document.getElementById("totalCarrito").innerHTML = "$"+ totalFinal;
+    document.getElementById("subtotal").innerHTML = "$" + total.toFixed(2);
+    document.getElementById("iva").innerHTML = "$" + iva.toFixed(2);
+    document.getElementById("totalCarrito").innerHTML = "$" + totalFinal.toFixed(2);
   }
 }
 
@@ -107,7 +107,7 @@ function eliminarProducto(producto) {
   });
 
   productosEnElCarrito.splice(indiceElementoAEliminar, 1);
-  notification("Has eliminado un producto", "check");
+  notifier.success("Has eliminado un producto");
 
   actualizarLS();
   updateCountCarrito();
@@ -126,13 +126,13 @@ function renderizarListaDeProductos() {
   for (const productoDeLista of productos) {
     // Crear div del producto //
     const div = document.createElement("div");
-    div.setAttribute("class", "col-10 mb-5 col-md-3");
-    
+    div.setAttribute("class", "producto col-10 mb-5 col-md-3");
+
     const card = document.createElement("div");
-    card.setAttribute("class", "card text-center")
+    card.setAttribute("class", "card text-center");
 
     const conteinerImg = document.createElement("div");
-    conteinerImg.setAttribute("class", "card m-4 container-img")
+    conteinerImg.setAttribute("class", "card m-4 container-img");
 
     // Creo la imagen del producto //
     const img = document.createElement("img");
@@ -140,17 +140,17 @@ function renderizarListaDeProductos() {
     img.setAttribute("class", "img-card");
     img.setAttribute("alt", `imagen de producto ${productoDeLista.nombre}`);
 
-    conteinerImg.append(img)
+    conteinerImg.append(img);
 
     const conteinerInfo = document.createElement("div");
-    
+
     const nombre = document.createElement("h4");
-    nombre.setAttribute("class", "card-title p-3 c-f")
+    nombre.setAttribute("class", "card-title p-3 c-f");
     nombre.innerText = productoDeLista.nombre;
 
     const id = document.createElement("p");
-    id.setAttribute("class", "text-center")
-    id.innerText = `Código: ${productoDeLista.id}`; 
+    id.setAttribute("class", "text-center");
+    id.innerText = `Código: ${productoDeLista.id}`;
 
     // Creo el precio //
     const precio = document.createElement("p");
@@ -168,7 +168,7 @@ function renderizarListaDeProductos() {
     });
     conteinerInfo.append(nombre, id, precio, btnAgregarAlCarrito);
 
-    card.append(conteinerImg,conteinerInfo);
+    card.append(conteinerImg, conteinerInfo);
 
     // Agrego al div todos los elementos //
     div.append(card);
@@ -178,40 +178,24 @@ function renderizarListaDeProductos() {
   }
 }
 
-function agregarProductoAlCarrito(productoAAgregar){
-  productosEnElCarrito.push(new ProductoEnCarrito(productoAAgregar.id, productoAAgregar.nombre, productoAAgregar.precio))
-  notification("Has añadido un nuevo producto", "check");
+function agregarProductoAlCarrito(productoAAgregar) {
+  productosEnElCarrito.push(new ProductoEnCarrito(productoAAgregar.id, productoAAgregar.nombre, productoAAgregar.precio));
+  notifier.success("Has añadido un nuevo producto");
   actualizarLS();
   updateCountCarrito();
   renderizarCarrito();
 }
 
-/*Funcion de notificaciones customs*/
-function notification(mesage, icon) {
-  const notification = $(
-    `<div class="notification fs-6">
-    <i style="background-color:#EE58CD;" class="fa-solid fa-${icon}"></i>
-    <span>${mesage}</span></div>`
-  ).appendTo(`#notifications`);
+let panel = document.getElementById("productosCarrito");
 
-  setTimeout(() => {
-    notification.fadeOut(700);
-  }, 3000);
-
-  return notification;
-}
-
-let panel = document.getElementById("productosCarrito")
-
-function renderizarCarrito(){
-  panel.innerHTML="";
-  console.log(obtenerProductos())
-  if (obtenerProductos()!=""){
-    console.log("test2")
-    for(const productoCarrito of productosEnElCarrito){
+function renderizarCarrito() {
+  panel.innerHTML = "";
+  console.log(obtenerProductos());
+  if (obtenerProductos() != "") {
+    for (const productoCarrito of productosEnElCarrito) {
       const div = document.createElement("div");
       div.setAttribute("class", "d-flex");
-      div.setAttribute("style", "border-bottom: 1px solid rgba(0,0,0,0.105)")
+      div.setAttribute("style", "border-bottom: 1px solid rgba(0,0,0,0.105)");
 
       const img = document.createElement("img");
       img.src = `./assets/productos/${productoCarrito.id}.jpg`;
@@ -220,32 +204,103 @@ function renderizarCarrito(){
 
       const conteinerInfo = document.createElement("div");
       conteinerInfo.setAttribute("class", "me-auto");
-      
+
       const nombre = document.createElement("div");
       nombre.innerText = productoCarrito.nombre;
 
       const precio = document.createElement("div");
-      precio.innerText= `$${productoCarrito.precio}`;
+      precio.innerText = `$${productoCarrito.precio}`;
 
       const botonEliminarProducto = document.createElement("button");
 
       botonEliminarProducto.setAttribute("class", "btn");
-      const i = document.createElement("i")
-      i.setAttribute("class", "fa-solid fa-xmark")
-      
+      const i = document.createElement("i");
+      i.setAttribute("class", "fa-solid fa-xmark");
+
       botonEliminarProducto.append(i);
       conteinerInfo.append(nombre, precio);
-      div.append(img,conteinerInfo,botonEliminarProducto);
-      panel.append(div)
+      div.append(img, conteinerInfo, botonEliminarProducto);
+      panel.append(div);
 
-    // Event Button eliminar
-    botonEliminarProducto.addEventListener("click", () => {
-      eliminarProducto(productoCarrito);
-    });
+      // Event Button eliminar
+      botonEliminarProducto.addEventListener("click", () => {
+        eliminarProducto(productoCarrito);
+      });
     }
   }
 }
 
-renderizarCarrito()
+function obtenerProductosDelJSON() {
+  fetch("/json/productos.json")
+    .then((response) => {
+      return response.json();
+    })
+    .then((productosJSON) => {
+      for (const productoJSON of productosJSON) {
+        productos.push(new Producto(productoJSON.id, productoJSON.nombre, productoJSON.precio));
+      }
+      renderizarListaDeProductos();
+    });
+}
+
+let input = document.getElementById("inputSearchProducts");
+
+function filterCosmeticos() {
+  let Productos, Producto, a, i, txtValue;
+  Productos = document.getElementById("productos");
+  Producto = Productos.getElementsByClassName("producto");
+
+  for (i = 0; i < Producto.length; i++) {
+    a = Producto[i].getElementsByTagName("div")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(input.value.toUpperCase()) > -1) {
+      Producto[i].style.display = "";
+    } else {
+      Producto[i].style.display = "none";
+    }
+  }
+}
+
+function clearSearch() {
+  input.value = "";
+  filterCosmeticos();
+}
+
+document.getElementById("inputSearchProducts").addEventListener("keyup", () => {
+  filterCosmeticos();
+});
+
+document.getElementById("clearSearch").addEventListener("click", () => {
+  clearSearch();
+});
+
+document.getElementById("finalizarCompra").addEventListener("click", () => {
+  notifier.success("Compra exitosa");
+});
+
+document.getElementById("cancelarCompra").addEventListener("click", () => {
+  notifier.success("Has cancelado tu compra");
+});
+
+document.getElementById("openModalMenu").addEventListener("click", () => {
+  let detalle = ""
+  let total = 0
+
+  const detallar = (nombre, precio) => {
+    return "Nombre: " + nombre + "\nPrecio: $" + precio + "\nCantidad: x1" + "\n =====================\n";
+  };
+
+  let body = document.getElementById("modal-body");
+  let valuearray = JSON.parse(localStorage.getItem("productosCarrito"));
+  for (let i = 0; i < JSON.parse(localStorage.getItem("productosCarrito")).length; i++) {
+    total += parseInt(JSON.stringify(valuearray[i].precio));
+    detalle += detallar(JSON.stringify(valuearray[i].nombre), JSON.stringify(valuearray[i].precio))
+  }
+
+  body.innerText = detalle 
+});
+
+obtenerProductosDelJSON();
+renderizarCarrito();
 updateBasketCount();
-alternMenu()
+alternMenu();

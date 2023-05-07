@@ -46,19 +46,23 @@
         </nav> 
     </header>
     <main class="bg-bg">
-        <div id="notifications" class="notifications"></div>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header" style="border-bottom: 1px solid rgba(0,0,0,0.105);">
                 <h5 class="offcanvas-title" id="offcanvasRightLabel">Tu carrito</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div id="productosCarrito" class="offcanvas-body d-flex flex-column"></div>
-            <div class="d-flex flex-column p-5">
+            <div id="buyInfo" class="flex-column p-5">
                 <div class="d-flex justify-content-between mb-1">Subtotal<span id="subtotal" class="b-color"></span></div>
                 <div class="d-flex justify-content-between mb-1">IVA<span id="iva" class="b-color"></span></div>
                 <div class="d-flex justify-content-between mb-4">Total<span id="totalCarrito" class="b-color"></span></div>
-                <button class="btn btn-success text-light w-100 mb-2">Confirmar compra</button>
-              </div>   
+                <button id="openModalMenu" class="btn btn-success text-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Confirmar compra</button>
+            </div>
+            <div id="noProductos" class="flex-column p-4 justify-content-center align-items-center">
+                <h3 class="fs-5">Tu carrito está vacío.</h3>
+                <p class="fs-6 text-center">Un montón de cosméticos te están esperando.</p>
+                <a href="index.html" class="btn btn-success text-light w-100 mb-2">Descubre productos</a>
+            </div>   
         </div>
         <!-- CAROUSEL -->
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -142,8 +146,31 @@
         <div class="container">
             <img src="assets/promo.jpg" class="d-block w-100 mt-5 mb-5" alt="banner publicidad black friday" />
         </div>
+        <!-- BÚSQUEDA -->
+        <div class="container d-flex justify-content-center mb-4">
+            <div class="input-group">
+            <span class="input-group-text" style="background-color: white; border-right: 0px;"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input id="inputSearchProducts" style="border-left: 0px;" type="text" class="form-control p-3" placeholder="¡Hola! ¿Qué estás buscando?">
+                <button id="clearSearch" class="input-group-text"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
         <!-- CARDS PRODUCTOS -->
-        <div id="productos" class="row justify-content-center m-0">
+        <div id="productos" class="row justify-content-center m-0"></div>
+        <!-- MODAL -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title fs-5" id="staticBackdropLabel">Detalles de la compra</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div id="modal-body" class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button id="cancelarCompra" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="finalizarCompra" type="button" class="btn btn-success text-light" data-bs-dismiss="modal">Pagar</button>
+                    </div>
+                </div>
+            </div>
         </div>       
     </main>
     <!-- FOOTER -->
@@ -174,7 +201,9 @@
             </div>
         </div>
     </footer>
+    <script src="js/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesome-notifications/3.1.3/index.var.min.js" integrity="sha512-eLF/cSp150FUkceFErOpCvz51bVFwGUQLRlm5ic89DwxMnzj47uHsOYF4gQSdwBpu7bjN/bV8fV76Dhha9TWlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/js.js"></script>
     <script src="js/bootstrap.js"></script>
 </body>
